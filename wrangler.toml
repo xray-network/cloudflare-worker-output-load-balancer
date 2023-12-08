@@ -1,4 +1,4 @@
-name = "output-serverless-load-balancer"
+name = "output-load-balancer"
 main = "src/index.ts"
 compatibility_date = "2023-10-30"
 
