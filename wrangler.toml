@@ -1,0 +1,14 @@
+name = "output-serverless-load-balancer"
+main = "src/index.ts"
+compatibility_date = "2023-10-30"
+
+[triggers]
+crons = ["* * * * *"]
+
+[[kv_namespaces]]
+binding = "KV_API_REQUESTS_COUNTER"
+id = "499e4377f1b44c51981100dbfa076f4f"
+
+[[kv_namespaces]]
+binding = "KV_API_HEALTH"
+id = "f2f42018d15a44b296d0634fe38d5ec3"

@@ -1,1 +1,1 @@
-# output-serverless-load-balancer
+# cloudflare-worker-output-load-balancer
