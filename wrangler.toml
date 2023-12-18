@@ -7,8 +7,8 @@ crons = ["* * * * *"]
 
 [[kv_namespaces]]
 binding = "KV_API_REQUESTS_COUNTER"
-id = "499e4377f1b44c51981100dbfa076f4f"
+id = "1d69b5918c8744709c39c667c9be1546"
 
 [[kv_namespaces]]
 binding = "KV_API_HEALTH"
-id = "f2f42018d15a44b296d0634fe38d5ec3"
+id = "9ca4e55d63b84014bac0f1bc6c499341"
