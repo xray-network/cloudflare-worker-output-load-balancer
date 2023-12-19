@@ -68,9 +68,7 @@ export default {
 		ctx.waitUntil(delayedProcessing())
 
 		if (response.ok) {
-			const headers = new Headers(response.headers)
-			headers.set("Access-Control-Allow-Origin", "*")
-			return new Response(response.body, { ...response, headers })
+			return addCorsHeaders(response)
 		}
 
 		if (response.status === 503) return throw503()
@@ -237,22 +235,28 @@ const getUrlSegments = (url: URL) => {
 	}
 }
 
+const addCorsHeaders = (response: Response) => {
+	const headers = new Headers(response.headers)
+	headers.set("Access-Control-Allow-Origin", "*")
+	return new Response(response.body, { ...response, status: response.status, headers })
+}
+
 const throw404 = () => {
-	return new Response("404. API not found. Check if the request is correct", { status: 404 })
+	return addCorsHeaders(new Response("404. API not found. Check if the request is correct", { status: 404 }))
 }
 
 const throw405 = () => {
-	return new Response("405. Method not allowed. Check if the request is correct", { status: 405 })
+	return addCorsHeaders(new Response("405. Method not allowed. Check if the request is correct", { status: 405 }))
 }
 
 const throw503 = () => {
-	return new Response("503. Service unavailable. No server is available to handle this request", { status: 503 })
+	return addCorsHeaders(new Response("503. Service unavailable. No server is available to handle this request", { status: 503 }))
 }
 
 const throw504 = () => {
-	return new Response("504. Gateway time-out. The server didn't respond in time", { status: 504 })
+	return addCorsHeaders(new Response("504. Gateway time-out. The server didn't respond in time", { status: 504 }))
 }
 
 const throwReject = (response: Response) => {
-	return new Response(response.body, response)
+	return addCorsHeaders(new Response(response.body, response))
 }
