@@ -4,7 +4,8 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-import serversInitialConfig from "./configServers"
+import serversInitialConfig from "./servers.conf"
+
 import * as Types from "./types"
 
 const API_PROTOCOL = "https:"

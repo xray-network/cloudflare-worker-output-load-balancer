@@ -172,4 +172,4 @@ dist
 .wrangler/
 
 # server_list
-src/configServers.ts
+src/servers.conf.ts

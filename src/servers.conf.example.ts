@@ -2,7 +2,7 @@ import type { ServersInitialConfig } from "./types"
 
 const serversInitialConfig: ServersInitialConfig = [
 	{
-		host: "server1.your-server-hostname.com", // ip addresses are forbidden by CF, expose them through CF DNS
+		host: "server1.your-server.com", // ip addresses are forbidden by CF, expose them through CF DNS
 		active: true, // set to false to disable this server
 		services: [
 			// list of services running on this server
@@ -21,7 +21,7 @@ const serversInitialConfig: ServersInitialConfig = [
 		],
 	},
 	{
-		host: "server2.your-server-hostname.com",
+		host: "server2.your-server.com",
 		active: true,
 		services: [
 			{
@@ -39,7 +39,7 @@ const serversInitialConfig: ServersInitialConfig = [
 		],
 	},
 	{
-		host: "devserver.com",
+		host: "devserver.your-server.com",
 		active: true,
 		services: [
 			{
