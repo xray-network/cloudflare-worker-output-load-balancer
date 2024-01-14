@@ -163,13 +163,13 @@ const getHealthCheckResults = async (serverConfig: Types.ServerConfig) => {
             { headers: { HostResolver: `${service}/${network}` } }
           )
             .then((response) => ({
-              host: "server.host",
+              host: server.host,
               service,
               network,
               healthy: response.ok,
             }))
             .catch((error) => ({
-              host: "server.host",
+              host: server.host,
               service,
               network,
               healthy: false,
