@@ -13,7 +13,7 @@ const API_GROUP = "output"
 const ALLOWED_METHODS = ["GET", "POST", "OPTIONS", "HEAD"]
 const HEALTHCHECK_ENABLED = false // choose healthy servers only
 const HEALTHCHECK_UPDATE_ENABLED = true // update health status every minute
-const TIMEOUT_DEFAULT = 30_000 // 30 sec
+const TIMEOUT_DEFAULT = 30_000 // 30 seconds
 const TIMEOUT_BEARER = 300_000 // 5 minutes
 const MAP_HEALTH_PATHNAME: Types.MapHealthPathname = {
   koios: "/tip",
@@ -25,8 +25,8 @@ export default {
   // Main fetch handler
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const { segments, pathname, requestPath, search } = getUrlSegments(new URL(request.url))
-    const [group, service, network, __prefix, __version] = segments
-    const prefixedVersion = `${__prefix}/${__version}`
+    const [group, service, network, prefix, version] = segments
+    const prefixedVersion = `${prefix}/${version}`
     const serversPool = filterEnabledServers(serversConfig)
     const serversPoolRelated = serversPool?.[service]?.[network]
     const authorizationHeader = request.headers.get("Authorization")
@@ -99,8 +99,8 @@ export default {
   // Crons handler
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {
     const delayedProcessing = async () => {
-      if (HEALTHCHECK_UPDATE_ENABLED) {
-        if (event.cron === "* * * * *") {
+      if (event.cron === "* * * * *") {
+        if (HEALTHCHECK_UPDATE_ENABLED) {
           const healthCheckResults = await getHealthCheckResults(serversConfig)
           console.log(healthCheckResults)
           await env.KV_OUTPUT_HEALTH.put(
