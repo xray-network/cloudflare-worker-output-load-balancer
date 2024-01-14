@@ -6,9 +6,9 @@ compatibility_date = "2023-10-30"
 crons = ["* * * * *"]
 
 [[kv_namespaces]]
-binding = "KV_API_REQUESTS_COUNTER"
-id = "1d69b5918c8744709c39c667c9be1546"
+binding = "KV_OUTPUT_COUNTER"
+id = "291cb6a9a51d43559bbb99a2ed67f453"
 
 [[kv_namespaces]]
-binding = "KV_API_HEALTH"
-id = "9ca4e55d63b84014bac0f1bc6c499341"
+binding = "KV_OUTPUT_HEALTH"
+id = "a9485f23e7004be984f31e90cae34770"

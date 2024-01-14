@@ -1,7 +1,7 @@
 interface Env {
 	JWT_BEARER_TOKEN: string
-	KV_API_REQUESTS_COUNTER: KVNamespace
-	KV_API_HEALTH: KVNamespace
+	KV_OUTPUT_COUNTER: KVNamespace
+	KV_OUTPUT_HEALTH: KVNamespace
 
 	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
 	// MY_KV_NAMESPACE: KVNamespace;

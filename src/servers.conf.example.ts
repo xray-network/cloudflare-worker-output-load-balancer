@@ -1,67 +1,57 @@
-import type { ServersInitialConfig } from "./types"
+import type { ServerConfig } from "./types"
 
-const serversInitialConfig: ServersInitialConfig = [
-	{
-		host: "server1.your-server.com", // ip addresses are forbidden by CF, expose them through CF DNS
-		active: true, // set to false to disable this server
-		services: [
-			// list of services running on this server
+const ServerConfig: ServerConfig = {
+	// Koios
+	koios: {
+		mainnet: [
 			{
-				name: "koios",
-				network: "mainnet",
-				version: "v1",
-				active: true,
+				host: "your-server.com:8050", // ip addresses are forbidden by CF, expose them through CF DNS (unproxied, to access custom ports)
+				version: "api/v1",
+				enabled: true,
 			},
 			{
-				name: "kupo",
-				network: "mainnet",
-				version: "v0",
-				active: true,
+				host: "your-server-2.com:8050",
+				version: "api/v1",
+				enabled: false,
+			},
+		],
+		preprod: [
+			{
+				host: "your-server-3.com:8050",
+				version: "api/v1",
+				enabled: true,
+			},
+		],
+		preview: [
+			{
+				host: "your-server-4.com:8050",
+				version: "api/v1",
+				enabled: true,
 			},
 		],
 	},
-	{
-		host: "server2.your-server.com",
-		active: true,
-		services: [
-			{
-				name: "koios",
-				network: "mainnet",
-				version: "v1",
-				active: true,
-			},
-			{
-				name: "kupo",
-				network: "mainnet",
-				version: "v0",
-				active: true,
-			},
-		],
-	},
-	{
-		host: "devserver.your-server.com",
-		active: true,
-		services: [
-			{
-				name: "ogmios",
-				network: "preprod",
-				version: "v0",
-				active: true,
-			},
-			{
-				name: "ogmios",
-				network: "preprod",
-				version: "v1",
-				active: true,
-			},
-			{
-				name: "ogmios",
-				network: "preview",
-				version: "v1",
-				active: true,
-			},
-		],
-	},
-]
 
-export default serversInitialConfig
+	// Kupo
+	kupo: {
+		mainnet: [
+			{
+				host: "your-server-5.com:8050",
+				version: "api/v1",
+				enabled: true,
+			},
+		],
+	},
+
+	// Ogmios
+	ogmios: {
+		mainnet: [
+			{
+				host: "your-server-6.com:8050",
+				version: "api/v1",
+				enabled: true,
+			},
+		],
+	},
+}
+
+export default ServerConfig

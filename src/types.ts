@@ -1,32 +1,19 @@
-export type ServersInitialConfig = {
-	host: string
-	active: boolean
-	services: {
-		name: string
-		network: string
-		version: string
-		active: boolean
-	}[]
-}[]
-
 export type Server = {
-	active: boolean
-	healthUrl: string
 	host: string
-	hostResolver: string
-	id: string
+	version: string
+	enabled: boolean
 }
 
 export type ServerConfig = {
-	[network: string]: {
-		[service: string]: {
-			[version: string]: Server[]
-		}
+	[service: string]: {
+		[network: string]: Server[]
 	}
 }
 
 export type ServerHealthStatus = {
-	id: string
+	host: string
+	service: string
+	network: string
 	healthy: boolean
 }
 
