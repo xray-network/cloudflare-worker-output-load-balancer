@@ -8,7 +8,7 @@ import serversConfig from "./servers.conf"
 
 import * as Types from "./types"
 
-const API_PROTOCOL = "http://"
+const API_PROTOCOL = "https://"
 const API_GROUP = "output"
 const ALLOWED_METHODS = ["GET", "POST", "OPTIONS", "HEAD"]
 const HEALTHCHECK_ENABLED = false // choose healthy servers only
@@ -102,7 +102,6 @@ export default {
       if (event.cron === "* * * * *") {
         if (HEALTHCHECK_UPDATE_ENABLED) {
           const healthCheckResults = await getHealthCheckResults(serversConfig)
-          console.log(healthCheckResults)
           await env.KV_OUTPUT_HEALTH.put(
             "status",
             JSON.stringify({
