@@ -50,6 +50,11 @@ export default {
     // Access Kupo only with Authorization header
     if (service === "kupo" && !authorized) return throw404()
 
+    // Healthcheck status system route
+    if (service === "system_health" && authorized) {
+      return new Response(JSON.stringify(await getHealthCheckResults(serversConfig)))
+    }
+
     // Return 404 if related server not found
     if (!serversPoolRelated) return throw404()
     if (!serversPoolRelated.find((server) => server.version === prefixedVersion)) return throw404()
@@ -101,12 +106,16 @@ export default {
     const delayedProcessing = async () => {
       if (event.cron === "* * * * *") {
         if (HEALTHCHECK_UPDATE_ENABLED) {
-          const healthCheckResults = await getHealthCheckResults(serversConfig)
+          const healthCheckResults = await env.OUTPUT_LOAD_BALANCER.fetch("https://service-binding/output/system_health", {
+            headers: {
+              Authorization: `Bearer ${env.JWT_BEARER_TOKEN}`,
+            }
+          })
           await env.KV_OUTPUT_HEALTH.put(
             "status",
             JSON.stringify({
               updatedAt: new Date().toISOString(),
-              status: healthCheckResults,
+              status: await healthCheckResults.json(),
             })
           )
         }

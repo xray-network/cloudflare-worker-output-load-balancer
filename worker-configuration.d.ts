@@ -1,4 +1,6 @@
 interface Env {
+	OUTPUT_LOAD_BALANCER: Fetcher
+
 	JWT_BEARER_TOKEN: string
 	KV_OUTPUT_COUNTER: KVNamespace
 	KV_OUTPUT_HEALTH: KVNamespace
