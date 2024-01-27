@@ -5,27 +5,29 @@ const ServerConfig: ServerConfig = {
   koios: {
     mainnet: [
       {
-        // IP addresses are forbidden by CF, expose them through CF DNS. HAProxy routes to the desired service on port 80 using the HostResolver header
-        host: "your-server.com",
+        // IP addresses are forbidden by Cloudflare, expose them through CF DNS.
+        // By default, the XRAY ecosystem is configured so that everything goes through the 80/443 port of HAProxy.
+        // You can specify any other port (eg, http://some-server:1337), but then you must disable domain proxying in the CF DNS panel.
+        host: "https://your-server-1.com",
         version: "api/v1",
         enabled: true,
       },
       {
-        host: "your-server-2.com",
+        host: "https://your-server-2.com",
         version: "api/v1",
         enabled: false,
       },
     ],
     preprod: [
       {
-        host: "your-server-3.com",
+        host: "https://your-preprod-server.com",
         version: "api/v1",
         enabled: true,
       },
     ],
     preview: [
       {
-        host: "your-server-4.com",
+        host: "https://your-server-4.com",
         version: "api/v1",
         enabled: true,
       },
@@ -36,7 +38,7 @@ const ServerConfig: ServerConfig = {
   kupo: {
     mainnet: [
       {
-        host: "your-server-5.com",
+        host: "https://your-server-5.com",
         version: "api/v1",
         enabled: true,
       },
@@ -47,7 +49,7 @@ const ServerConfig: ServerConfig = {
   ogmios: {
     mainnet: [
       {
-        host: "your-server-6.com",
+        host: "https://your-server-6.com",
         version: "api/v1",
         enabled: true,
       },

@@ -8,7 +8,6 @@ import serversConfig from "./servers.conf"
 
 import * as Types from "./types"
 
-const API_PROTOCOL = "https://"
 const API_GROUP = "output"
 const ALLOWED_METHODS = ["GET", "POST", "OPTIONS", "HEAD"]
 const HEALTHCHECK_ENABLED = false // choose healthy servers only
@@ -72,7 +71,7 @@ export default {
         abortController.abort()
       }, timeout)
 
-      const requestUrl = `${API_PROTOCOL}${serverRandom.host}${service === "koios" ? "/rpc" : ""}`
+      const requestUrl = `${serverRandom.host}${service === "koios" ? "/rpc" : ""}`
       const response = await fetch(requestUrl + requestPath + search, {
         method: request.method,
         ...(request.method === "POST" && { body: request.body }),
@@ -167,7 +166,7 @@ const getHealthCheckResults = async (serverConfig: Types.ServerConfig) => {
       networks[1].forEach((server) => {
         if (server.enabled) {
           const healthCheckPromise = fetch(
-            `${API_PROTOCOL}${server.host}${service === "koios" ? "/rpc" : ""}${MAP_HEALTH_PATHNAME[service] || ""}`,
+            `${server.host}${service === "koios" ? "/rpc" : ""}${MAP_HEALTH_PATHNAME[service] || ""}`,
             { headers: { HostResolver: `${service}/${network}` } }
           )
             .then((response) => ({
