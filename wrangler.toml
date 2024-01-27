@@ -2,13 +2,11 @@ name = "output-load-balancer"
 main = "src/index.ts"
 compatibility_date = "2023-10-30"
 
+
+kv_namespaces = [
+  { binding = "KV_OUTPUT_COUNTER", id = "291cb6a9a51d43559bbb99a2ed67f453" },
+  { binding = "KV_OUTPUT_HEALTH", id = "a9485f23e7004be984f31e90cae34770" }
+]
+
 [triggers]
 crons = ["* * * * *"]
-
-[[kv_namespaces]]
-binding = "KV_OUTPUT_COUNTER"
-id = "291cb6a9a51d43559bbb99a2ed67f453"
-
-[[kv_namespaces]]
-binding = "KV_OUTPUT_HEALTH"
-id = "a9485f23e7004be984f31e90cae34770"
