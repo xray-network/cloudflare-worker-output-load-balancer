@@ -72,10 +72,12 @@ export default {
       }, timeout)
 
       const requestUrl = `${serverRandom.host}${service === "koios" ? "/rpc" : ""}`
+      const headers = new Headers(request.headers)
+      headers.set("HostResolver", `${service}/${network}`)
       const response = await fetch(requestUrl + requestPath + search, {
         method: request.method,
         ...(request.method === "POST" && { body: request.body }),
-        headers: { HostResolver: `${service}/${network}` },
+        headers,
         signal: abortController.signal,
       })
 
@@ -105,11 +107,14 @@ export default {
     const delayedProcessing = async () => {
       if (event.cron === "* * * * *") {
         if (HEALTHCHECK_UPDATE_ENABLED) {
-          const healthCheckResults = await env.OUTPUT_LOAD_BALANCER.fetch("https://service-binding/output/system_health", {
-            headers: {
-              Authorization: `Bearer ${env.JWT_BEARER_TOKEN}`,
+          const healthCheckResults = await env.OUTPUT_LOAD_BALANCER.fetch(
+            "https://service-binding/output/system_health",
+            {
+              headers: {
+                Authorization: `Bearer ${env.JWT_BEARER_TOKEN}`,
+              },
             }
-          })
+          )
           await env.KV_OUTPUT_HEALTH.put(
             "status",
             JSON.stringify({
