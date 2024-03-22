@@ -73,6 +73,7 @@ export default {
 
       const requestUrl = `${serverRandom.host}${service === "koios" ? "/rpc" : ""}`
       const headers = new Headers(request.headers)
+      headers.delete("Authorization")
       headers.set("HostResolver", `${service}/${network}`)
       headers.set("BearerResolver", env.JWT_BEARER_TOKEN)
       const response = await fetch(requestUrl + requestPath + search, {
