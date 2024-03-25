@@ -55,6 +55,17 @@ const ServerConfig: ServerConfig = {
       },
     ],
   },
+
+  // NFTCDN
+  nftcdn: {
+    mainnet: [
+      {
+        host: "https://your-server-7.com",
+        version: "api/v1",
+        enabled: true,
+      },
+    ],
+  },
 }
 
 export default ServerConfig
