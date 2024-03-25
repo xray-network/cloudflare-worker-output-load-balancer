@@ -45,3 +45,7 @@ yarn start
 ```
 yarn deploy
 ```
+
+## Endpoints
+
+Proxies Ogmios, Koios, Kupo, NFTCDN or the API of any other service configured in `servers.conf.ts`.
